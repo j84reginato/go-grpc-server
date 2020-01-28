@@ -1,0 +1,20 @@
+version: "3.2"
+services:
+  server:
+    build: .
+    container_name: go_grpc_server
+    privileged: true
+    ports:
+      - 50051:50051
+    networks:
+      - default
+      - mm_gateway
+    volumes:
+      - ./:/go/src/go_grpc_server
+    environment:
+      PHP_IDE_CONFIG: serverName=docker
+      XDEBUG_CONFIG: idekey=grpc_server_go
+
+networks:
+  mm_gateway:
+    external: true
